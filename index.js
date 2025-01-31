@@ -62,7 +62,7 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
   }
   else
   {
-    const exercise = new Exercise({description: req.body.description, duration: parseInt(req.body.duration), date: new Date(), id: req.params._id});
+    const exercise = new Exercise({description: req.body.description, duration: parseInt(req.body.duration), date: new Date(req.body.date), id: req.params._id});
     exercise.save().then(() => {
     res.json({username, description: req.body.description, duration: parseInt(req.body.duration), date: new Date(req.body.date).toDateString(), _id});
     });
