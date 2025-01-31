@@ -67,7 +67,6 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
     res.json({username, description: req.body.description, duration: parseInt(req.body.duration), date: new Date(req.body.date).toDateString(), _id});
     });
   }
-  user.save();
 })
 
 app.get("/api/users/:_id/logs", async (req, res) => {
@@ -79,7 +78,7 @@ app.get("/api/users/:_id/logs", async (req, res) => {
     if (from) conditions.date.$gte = new Date(from);
     if (to) conditions.date.$lte = new Date(to);
   }
-  const number = await (await Exercise.find({id: req.params._id})).length;
+  const number = (await Exercise.find({id: req.params._id})).length;
   console.log(number);
   console.log(conditions)
   console.log(limit);
